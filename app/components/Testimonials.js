@@ -58,7 +58,7 @@ const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto mb-12"
         >
-          <h2 className="text-4xl font-bold text-primary mb-4">What Our Customers Say</h2>
+          <h2 className="text-sm font-semibold text-primary uppercase tracking-wide">What Our Customers Say</h2>
           <p className="text-lg text-muted-foreground">
             We’ve helped thousands move stress-free. Here’s what they have to say:
           </p>
