@@ -44,7 +44,7 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-sm font-semibold text-primary uppercase tracking-wide">Frequently Asked Questions</h2>
+          <h2 className="text-lg  font-semibold text-primary uppercase tracking-wide">Frequently Asked Questions</h2>
           <p className="text-lg text-muted-foreground mt-2">
             Got questions? We have answers. Here are some of the most common inquiries from our customers.
           </p>

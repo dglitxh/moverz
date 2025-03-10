@@ -53,7 +53,7 @@ const Pricing = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto mb-12"
         >
-          <h2 className="text-sm font-semibold text-primary uppercase tracking-wide">Simple & Transparent Pricing</h2>
+          <h2 className="text-lg font-semibold text-primary uppercase tracking-wide">Simple & Transparent Pricing</h2>
           <p className="text-muted-foreground mt-4 leading-relaxed">
             Choose a plan that fits your needs, or get a <strong className="text-muted-foreground mt-4 leading-relaxed">real-time moving estimate</strong>.
           </p>

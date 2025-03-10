@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 import { ShieldCheck, Clock, DollarSign, ThumbsUp, Truck } from "lucide-react";
 import Image from "next/image";
@@ -43,17 +44,18 @@ const standoutFeatures = [
 
 const StandOut = () => {
   return (
-    <section className="bg-background py-16">
+    <section className="container-lg bg-background py-16">
       <div className="container mx-auto px-6">
-        {/* Section Intro */}
+        {/* Section Intro - Center Aligned */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-10"
+          className="max-w-2xl mx-auto text-center mb-10"
         >
-          <h2 className="text-4xl font-bold text-primary mb-3">What Makes Us Stand Out?</h2>
-          <p className="text-lg text-muted-foreground">
+          <h2 className="text-lg font-semibold text-primary uppercase tracking-wide">What Makes Us Stand Out?</h2>
+          <h3 className="text-muted-foreground mt-4">Moving Made Easier for You</h3>
+          <p className="text-muted-foreground mt-4">
             Moving can be stressful, but we make it <strong>effortless, efficient, and affordable.</strong>  
             Here's why people trust us:
           </p>

@@ -1,69 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Truck, ShieldCheck, Users, PackageCheck } from "lucide-react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const AboutUs = () => {
   return (
     <section id="about" className="py-20 bg-background text-foreground">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         
-        {/* Top Section - About Info (Centered) */}
+        {/* Left Side - Text Content */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-12"
         >
           <h3 className="text-sm font-semibold text-primary uppercase tracking-wide">
             About Us
           </h3>
+          <h2 className="text-4xl font-bold mt-2">Who We Are</h2>
           <p className="text-muted-foreground mt-4 leading-relaxed">
-            MoveMaster is dedicated to making your moving experience seamless and
-            stress-free. With years of expertise, we handle your belongings with
-            the utmost care and professionalism.
+            MoveMaster is your trusted partner in making every move effortless. 
+            Whether it's a local relocation or a long-distance move, our team ensures 
+            a smooth, stress-free experience with professionalism and care.
           </p>
+          <div className="mt-6">
+            <Button size="lg">Learn More</Button>
+          </div>
         </motion.div>
 
-        {/* Perks Card (Underneath the Text) */}
+        {/* Right Side - Image */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="border border-border rounded-lg p-6 bg-card shadow-lg max-w-3xl mx-auto"
+          className="relative w-full h-[350px]"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
-              {
-                icon: <Truck className="w-6 h-6 text-primary" />,
-                title: "Reliable Movers",
-                text: "Experienced professionals to handle your move with care.",
-              },
-              {
-                icon: <ShieldCheck className="w-6 h-6 text-primary" />,
-                title: "Safe & Secure",
-                text: "Your belongings are insured and protected throughout the journey.",
-              },
-              {
-                icon: <Users className="w-6 h-6 text-primary" />,
-                title: "Customer Satisfaction",
-                text: "We prioritize excellent service and a hassle-free experience.",
-              },
-              {
-                icon: <PackageCheck className="w-6 h-6 text-primary" />,
-                title: "Packing & Unpacking",
-                text: "Professional packing services to ensure safe transport.",
-              },
-            ].map((perk, index) => (
-              <div key={index} className="flex items-start gap-3">
-                {perk.icon}
-                <div>
-                  <h4 className="text-lg font-semibold">{perk.title}</h4>
-                  <p className="text-muted-foreground text-sm mt-1">{perk.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <Image 
+            src="/on-time.jpg" 
+            alt="Moving Team" 
+            fill 
+            className="rounded-lg object-cover shadow-lg"
+          />
         </motion.div>
 
       </div>

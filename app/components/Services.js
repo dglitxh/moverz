@@ -22,7 +22,7 @@ const Services = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto mb-10"
         >
-          <h2 className="text-sm font-semibold text-primary uppercase tracking-wide">Moving Made Simple</h2>
+          <h2 className="text-lg  font-semibold text-primary uppercase tracking-wide">Moving Made Simple</h2>
           <p className="text-muted-foreground mt-4 leading-relaxed">
             Whether it's a new home or office, moving can be overwhelming. That's why we offer hassle-free services tailored to your needs. Let us handle the heavy lifting!
           </p>

@@ -33,7 +33,7 @@ const ContactUs = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-sm font-semibold text-primary uppercase tracking-wide">Get in Touch</h2>
+          <h2 className="text-lg  font-semibold text-primary uppercase tracking-wide">Get in Touch</h2>
           <p className="text-muted-foreground mt-2">
             Have questions or need a quote? Contact us today, and let's make your move effortless.
           </p>
