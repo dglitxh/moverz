@@ -24,7 +24,7 @@ const ContactUs = () => {
   };
 
   return (
-    <section className="bg-background py-20">
+    <section id="contact" className="bg-background py-20">
       <div className="container mx-auto px-6 max-w-4xl">
         {/* Heading */}
         <motion.div
@@ -33,7 +33,7 @@ const ContactUs = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-4xl font-bold text-primary">Get in Touch</h2>
+          <h2 className="text-lg  font-semibold text-primary uppercase tracking-wide">Get in Touch</h2>
           <p className="text-muted-foreground mt-2">
             Have questions or need a quote? Contact us today, and let's make your move effortless.
           </p>

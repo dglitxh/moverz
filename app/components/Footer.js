@@ -10,7 +10,7 @@ const Footer = () => {
         
         {/* Brand & Description */}
         <div>
-          <h2 className="text-2xl font-bold text-primary">MoveMaster</h2>
+          <h2 className="text-sm font-semibold text-primary uppercase tracking-wide">MoveMaster</h2>
           <p className="text-sm mt-2">
             Stress-free, affordable moving services. We handle your belongings with care.
           </p>

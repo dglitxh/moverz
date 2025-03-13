@@ -6,11 +6,13 @@ import Pricing from "./components/Pricing";
 import Testimonials from "./components/Testimonials";
 import FAQ from "./components/Frequentlyaskedquestions";
 import ContactUs from "./components/Contact";
+import AboutUs from "./components/AboutUs";
 
 export default function Home() {
   return (
     <div className="container-lg mx-auto px-4">
 <Hero />
+<AboutUs />
 <StandOut />
 <Services />
 <Pricing />

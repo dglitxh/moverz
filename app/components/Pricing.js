@@ -44,7 +44,7 @@ const Pricing = () => {
   };
 
   return (
-    <section className="bg-background py-20">
+    <section id="pricing" className="bg-background py-20">
       <div className="container mx-auto px-6 text-center">
         {/* Section Title */}
         <motion.div
@@ -53,9 +53,9 @@ const Pricing = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto mb-12"
         >
-          <h2 className="text-4xl font-bold text-primary">Simple & Transparent Pricing</h2>
-          <p className="text-lg text-muted-foreground mt-3">
-            Choose a plan that fits your needs, or get a <strong>real-time moving estimate</strong>.
+          <h2 className="text-lg font-semibold text-primary uppercase tracking-wide">Simple & Transparent Pricing</h2>
+          <p className="text-muted-foreground mt-4 leading-relaxed">
+            Choose a plan that fits your needs, or get a <strong className="text-muted-foreground mt-4 leading-relaxed">real-time moving estimate</strong>.
           </p>
         </motion.div>
 
@@ -69,7 +69,7 @@ const Pricing = () => {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className={`p-6 rounded-xl border transition-colors ${
                 plan.highlight
-                  ? "bg-primary text-white dark:bg-gray-500 dark:text-black scale-105 shadow-lg"
+                  ? "bg-primary text-white dark:bg-primary/30 dark:text-black scale-105 shadow-lg"
                   : "bg-background text-foreground border-gray-300 dark:border-gray-700"
               }`}
             >
@@ -91,41 +91,7 @@ const Pricing = () => {
           ))}
         </div>
 
-        {/* Cost Estimator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 bg-background dark:bg-gray-900 shadow-lg rounded-xl p-8 max-w-3xl mx-auto text-center"
-        >
-          <h3 className="text-2xl font-semibold text-primary mb-4 flex items-center justify-center gap-2">
-            <BadgeDollarSign className="w-6 h-6" /> Get a Free Moving Estimate
-          </h3>
-          <div className="flex flex-col md:flex-row gap-4">
-            <Input
-              type="text"
-              placeholder="Moving from..."
-              value={from}
-              onChange={(e) => setFrom(e.target.value)}
-              className="bg-gray-100 dark:bg-gray-800 text-black dark:text-white border-gray-300 dark:border-gray-600"
-            />
-            <Input
-              type="text"
-              placeholder="Moving to..."
-              value={to}
-              onChange={(e) => setTo(e.target.value)}
-              className="bg-gray-100 dark:bg-gray-800 text-black dark:text-white border-gray-300 dark:border-gray-600"
-            />
-          </div>
-          <Button size="lg" className="mt-4 w-full" onClick={calculateEstimate}>
-            Calculate Estimate
-          </Button>
-          {estimatedCost && (
-            <p className="mt-4 text-lg font-semibold text-primary">
-              Estimated Cost: {estimatedCost}
-            </p>
-          )}
-        </motion.div>
+        
       </div>
     </section>
   );

@@ -17,7 +17,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative bg-background py-20 md:py-32">
+    <section id="hero" className="relative bg-background py-20 md:py-32">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
         {/* Left Content */}
         <motion.div
