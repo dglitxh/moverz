@@ -13,7 +13,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section className=" py-20">
+    <section id="services" className=" py-20">
       <div className="container mx-auto px-6 text-center">
         {/* Engaging Intro */}
         <motion.div

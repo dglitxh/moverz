@@ -44,7 +44,7 @@ const Pricing = () => {
   };
 
   return (
-    <section className="bg-background py-20">
+    <section id="pricing" className="bg-background py-20">
       <div className="container mx-auto px-6 text-center">
         {/* Section Title */}
         <motion.div
