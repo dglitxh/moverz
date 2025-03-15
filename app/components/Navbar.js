@@ -21,8 +21,8 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
-  const [isSheetOpen, setIsSheetOpen] = useState(false); 
-  const [isScrolled, setIsScrolled] = useState(false); 
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // ✅ Load dark mode from localStorage (prevents flickering)
   useEffect(() => {
@@ -49,7 +49,7 @@ const Navbar = () => {
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    setIsSheetOpen(false); 
+    setIsSheetOpen(false);
   };
 
   // ✅ Optimize scroll detection
@@ -72,8 +72,8 @@ const Navbar = () => {
             </a>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6 mx-auto">
+          {/* Desktop Navigation - Hidden on mobile and tablets */}
+          <div className="hidden md:hidden lg:flex space-x-6 mx-auto">
             {navLinks.map((link, index) => (
               <motion.a
                 key={index}
@@ -96,14 +96,14 @@ const Navbar = () => {
               <Moon className="w-6 h-6" />
             </Button>
 
-            {/* Login & Sign Up */}
-            <div className="hidden md:flex space-x-2">
+            {/* Login & Sign Up - Hidden on mobile and tablets */}
+            <div className="hidden md:hidden lg:flex space-x-2">
               <Button variant="outline" onClick={() => setIsLoginOpen(true)}>Login</Button>
               <Button onClick={() => setIsSignupOpen(true)}>Sign Up</Button>
             </div>
 
-            {/* Mobile Menu */}
-            <div className="md:hidden">
+            {/* Mobile Menu - Visible only on screens < 1024px */}
+            <div className="lg:hidden">
               <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon">
@@ -111,48 +111,46 @@ const Navbar = () => {
                   </Button>
                 </SheetTrigger>
                 <SheetContent 
-  side="left" 
-  className="bg-background w-72 shadow-lg border-r border-gray-200 dark:border-gray-800"
-  style={{ transform: "translateX(0)", willChange: "transform, opacity" }} // ✅ Prevent flickering
->
-  {/* ✅ Added SheetDescription to fix warning */}
-  <SheetDescription>
-    Use the links below to navigate through the website.
-  </SheetDescription>
-  <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
+                  side="left" 
+                  className="bg-background w-72 shadow-lg border-r border-gray-200 dark:border-gray-800"
+                  style={{ transform: "translateX(0)", willChange: "transform, opacity" }} 
+                >
+                 
+                  <SheetDescription>
+                  </SheetDescription>
+                  <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
 
-  {/* Sidebar Content */}
-  <div className="flex flex-col space-y-6 mt-10 px-4">
-    {navLinks.map((link, index) => (
-      <a
-        key={index}
-        href={link.href}
-        className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors duration-300 cursor-pointer"
-        onClick={(e) => handleScroll(e, link.href)}
-      >
-        {link.name}
-      </a>
-    ))}
+                  {/* Sidebar Content */}
+                  <div className="flex flex-col space-y-6 mt-10 px-4">
+                    {navLinks.map((link, index) => (
+                      <a
+                        key={index}
+                        href={link.href}
+                        className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors duration-300 cursor-pointer"
+                        onClick={(e) => handleScroll(e, link.href)}
+                      >
+                        {link.name}
+                      </a>
+                    ))}
 
-    {/* Login & Sign Up */}
-    <div className="flex flex-col space-y-2 mt-6">
-      <Button 
-        variant="outline" 
-        className="w-full" 
-        onClick={() => { setIsLoginOpen(true); setIsSheetOpen(false); }} 
-      >
-        Login
-      </Button>
-      <Button 
-        className="w-full" 
-        onClick={() => { setIsSignupOpen(true); setIsSheetOpen(false); }} 
-      >
-        Sign Up
-      </Button>
-    </div>
-  </div>
-</SheetContent>
-
+                    {/* Login & Sign Up */}
+                    <div className="flex flex-col space-y-2 mt-6">
+                      <Button 
+                        variant="outline" 
+                        className="w-full" 
+                        onClick={() => { setIsLoginOpen(true); setIsSheetOpen(false); }} 
+                      >
+                        Login
+                      </Button>
+                      <Button 
+                        className="w-full" 
+                        onClick={() => { setIsSignupOpen(true); setIsSheetOpen(false); }} 
+                      >
+                        Sign Up
+                      </Button>
+                    </div>
+                  </div>
+                </SheetContent>
               </Sheet>
             </div>
           </div>
