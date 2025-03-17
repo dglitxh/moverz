@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useTime } from "framer-motion";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,13 +9,35 @@ import { useState } from "react";
 
 const LoginModal = ({ isOpen, onClose, openSignup }) => {
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({});
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
+    let data = JSON.stringify(FormData);
+    console.log(data, "me nieee");
+    let status = await httpReq("POST", "../api/auth/login", data);
+    if (status) {
+      setLoading(false);
+      if (status == 201 || status == 200) {
+        //just for debugging: to be changed later
+        alert("User created succesfully");
+      } else {
+        //just for debugging: to be changed later
+        alert("Authentication failure.");
+      }
+    }
     setTimeout(() => setLoading(false), 2000);
+    alert("auth timeout, check internet connection!");
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    let fd = formData;
+    fd[name] = value;
+    setFormData(fd);
+    console.log(formData);
+  }
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       {/* Background Overlay - Click to Close */}
@@ -54,12 +76,14 @@ const LoginModal = ({ isOpen, onClose, openSignup }) => {
             <Input 
               type="email" 
               placeholder="Email" 
+              onChange={handleChange}
               required 
               className="px-4 py-3 text-lg bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-black dark:focus:ring-white"
             />
             <Input 
               type="password" 
-              placeholder="Password" 
+              placeholder="Password"
+              onChange={handleChange} 
               required 
               className="px-4 py-3 text-lg bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-black dark:focus:ring-white"
             />
@@ -68,6 +92,7 @@ const LoginModal = ({ isOpen, onClose, openSignup }) => {
               type="submit" 
               className="w-full bg-black text-white dark:bg-white dark:text-black transition hover:opacity-80 flex justify-center items-center h-12 text-lg" 
               disabled={loading}
+              onClick={handleLogin}
             >
               {loading ? <Loader2 className="animate-spin w-6 h-6" /> : "Log In"}
             </Button>
