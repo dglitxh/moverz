@@ -22,7 +22,7 @@ export const httpReq = async (type, url, data) => {
       config["body"] = data;
       const req = await fetch(url, config);
       res = await req.text();
-      if (res.status <= 201) {
+      if (req.status <= 201) {
         console.log(res.status, "success")
       } else {
         console.log(res, "resss helper", req.status);
