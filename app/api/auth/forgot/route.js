@@ -17,4 +17,13 @@ export async function POST(req, res) {
       console.log(errorMessage);
       // ..
     });
+  return err
+      ? NextResponse.json(
+          { message: "failed to send email" },
+          { status: 400 }
+        )
+      : NextResponse.json(
+          { message: "email sent succesfully" },
+          { status: 200 }
+        );
 }
