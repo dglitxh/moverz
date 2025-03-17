@@ -10,7 +10,7 @@ import AboutUs from "./components/AboutUs";
 
 export default function Home() {
   return (
-    <div className="container-lg mx-auto px-4">
+    <div className="">
 <Hero />
 <AboutUs />
 <StandOut />

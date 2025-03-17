@@ -85,6 +85,7 @@ const Hero = () => {
             width={600}
             height={400}
             className="rounded-lg shadow-lg"
+            priority
           />
         </motion.div>
       </div>

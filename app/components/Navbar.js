@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetDescription } from "@/components/ui/sheet";
 import { DialogTitle } from "@/components/ui/dialog"; 
 import LoginModal from "../modals/LoginModal";
 import SignupModal from "../modals/SignupModal";
@@ -21,12 +21,25 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
-  const [isSheetOpen, setIsSheetOpen] = useState(false); // Controls sidebar
-  const [isScrolled, setIsScrolled] = useState(false); // Adds background when scrolling
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // ✅ Load dark mode from localStorage (prevents flickering)
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setDarkMode(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle("dark");
+    setDarkMode((prev) => {
+      const newMode = !prev;
+      localStorage.setItem("theme", newMode ? "dark" : "light");
+      document.documentElement.classList.toggle("dark", newMode);
+      return newMode;
+    });
   };
 
   // Smooth scroll function
@@ -36,10 +49,10 @@ const Navbar = () => {
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    setIsSheetOpen(false); // Close sidebar on mobile
+    setIsSheetOpen(false);
   };
 
-  // Add background when scrolling down
+  // ✅ Optimize scroll detection
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
@@ -53,18 +66,14 @@ const Navbar = () => {
         <div className="container mx-auto px-6 py-4 flex items-center justify-between flex-wrap">
           
           {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
             <a href="#" className="text-2xl font-bold text-primary">
               MoveMaster
             </a>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6 mx-auto">
+          {/* Desktop Navigation - Hidden on mobile and tablets */}
+          <div className="hidden md:hidden lg:flex space-x-6 mx-auto">
             {navLinks.map((link, index) => (
               <motion.a
                 key={index}
@@ -87,25 +96,28 @@ const Navbar = () => {
               <Moon className="w-6 h-6" />
             </Button>
 
-            {/* Login & Sign Up */}
-            <div className="hidden md:flex space-x-2">
+            {/* Login & Sign Up - Hidden on mobile and tablets */}
+            <div className="hidden md:hidden lg:flex space-x-2">
               <Button variant="outline" onClick={() => setIsLoginOpen(true)}>Login</Button>
               <Button onClick={() => setIsSignupOpen(true)}>Sign Up</Button>
             </div>
 
-            {/* Mobile Menu */}
-            <div className="md:hidden">
+            {/* Mobile Menu - Visible only on screens < 1024px */}
+            <div className="lg:hidden">
               <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" onClick={() => setIsSheetOpen(true)}>
+                  <Button variant="ghost" size="icon">
                     <Menu className="w-6 h-6" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent
-                  side="left"
-                  className="bg-background w-72 shadow-lg backdrop-blur-md border-r border-gray-200 dark:border-gray-800"
+                <SheetContent 
+                  side="left" 
+                  className="bg-background w-72 shadow-lg border-r border-gray-200 dark:border-gray-800"
+                  style={{ transform: "translateX(0)", willChange: "transform, opacity" }} 
                 >
-                  {/* Hidden Title for Accessibility */}
+                 
+                  <SheetDescription>
+                  </SheetDescription>
                   <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
 
                   {/* Sidebar Content */}
@@ -123,22 +135,16 @@ const Navbar = () => {
 
                     {/* Login & Sign Up */}
                     <div className="flex flex-col space-y-2 mt-6">
-                      <Button
-                        variant="outline"
-                        className="w-full"
-                        onClick={() => {
-                          setIsLoginOpen(true);
-                          setIsSheetOpen(false); // Close sidebar
-                        }}
+                      <Button 
+                        variant="outline" 
+                        className="w-full" 
+                        onClick={() => { setIsLoginOpen(true); setIsSheetOpen(false); }} 
                       >
                         Login
                       </Button>
-                      <Button
-                        className="w-full"
-                        onClick={() => {
-                          setIsSignupOpen(true);
-                          setIsSheetOpen(false); // Close sidebar
-                        }}
+                      <Button 
+                        className="w-full" 
+                        onClick={() => { setIsSignupOpen(true); setIsSheetOpen(false); }} 
                       >
                         Sign Up
                       </Button>
@@ -151,27 +157,13 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Modals - Will ONLY open when triggered */}
+      {/* Modals */}
       {isLoginOpen && (
-        <LoginModal
-          isOpen={isLoginOpen}
-          onClose={() => setIsLoginOpen(false)}
-          openSignup={() => {
-            setIsLoginOpen(false);
-            setIsSignupOpen(true);
-          }}
-        />
+        <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} openSignup={() => { setIsLoginOpen(false); setIsSignupOpen(true); }} />
       )}
 
       {isSignupOpen && (
-        <SignupModal 
-          isOpen={isSignupOpen} 
-          onClose={() => setIsSignupOpen(false)} 
-          openLogin={() => {
-            setIsSignupOpen(false);
-            setIsLoginOpen(true);
-          }} 
-        />
+        <SignupModal isOpen={isSignupOpen} onClose={() => setIsSignupOpen(false)} openLogin={() => { setIsSignupOpen(false); setIsLoginOpen(true); }} />
       )}
     </>
   );
