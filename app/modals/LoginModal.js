@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { httpReq } from "../util/helpers";
+
 
 const LoginModal = ({ isOpen, onClose, openSignup }) => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +16,7 @@ const LoginModal = ({ isOpen, onClose, openSignup }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    let data = JSON.stringify(FormData);
+    let data = JSON.stringify(formData);
     console.log(data, "me nieee");
     let status = await httpReq("POST", "../api/auth/login", data);
     if (status) {
@@ -76,6 +78,7 @@ const LoginModal = ({ isOpen, onClose, openSignup }) => {
             <Input 
               type="email" 
               placeholder="Email" 
+              name="email"
               onChange={handleChange}
               required 
               className="px-4 py-3 text-lg bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-black dark:focus:ring-white"
@@ -83,6 +86,7 @@ const LoginModal = ({ isOpen, onClose, openSignup }) => {
             <Input 
               type="password" 
               placeholder="Password"
+              name="password"
               onChange={handleChange} 
               required 
               className="px-4 py-3 text-lg bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-black dark:focus:ring-white"
