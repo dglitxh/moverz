@@ -29,7 +29,7 @@ const Hero = () => {
           <h1 className="text-4xl md:text-6xl font-bold text-primary leading-tight">
             Move with Ease & Confidence
           </h1>
-          <p className="text-lg text-muted-foreground mt-4">
+          <p className="text-muted-foreground mt-4 leading-relaxed">
             Affordable & professional moving services tailored for you. 
             Get a free estimate and book hassle-free moving today!
           </p>
