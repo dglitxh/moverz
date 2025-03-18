@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { X, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { httpReq } from "../util/helpers";
+import { toast } from "sonner"; // ✅ Import toast
 
 const SignupModal = ({ isOpen, onClose, openLogin }) => {
   const [loading, setLoading] = useState(false);
@@ -22,28 +23,28 @@ const SignupModal = ({ isOpen, onClose, openLogin }) => {
     e.preventDefault();
     setLoading(true);
     let data = JSON.stringify(formData);
-    console.log(data, "me nieee");
-    let status = await httpReq("POST", "../api/auth/signup", data);
-    if (status) {
+
+    try {
+      let response = await httpReq("POST", "../api/auth/signup", data);
+
       setLoading(false);
-      if (status == 201 || status == 200) {
-        //just for debugging: to be changed later
-        alert("User created succesfully");
+
+      if (response === 201 || response === 200) {
+        toast.success("🎉 Signup successful! Welcome aboard!"); // ✅ This will show the toast
+        onClose(); // ✅ Close modal after success
       } else {
-        //just for debugging: to be changed later
-        alert("Authentication failure.");
+        toast.error("❌ Signup failed. Please try again!"); // ✅ Show error toast
       }
+    } catch (error) {
+      toast.error("⚠️ Something went wrong. Check your connection!");
     }
+
     setTimeout(() => setLoading(false), 6000);
-    alert("auth timeout, check internet connection!");
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let fd = formData;
-    fd[name] = value;
-    setFormData(fd);
-    console.log(formData);
+    setFormData({ ...formData, [name]: value }); // ✅ Correct form state update
   };
 
   return (
@@ -82,18 +83,18 @@ const SignupModal = ({ isOpen, onClose, openLogin }) => {
             <Input
               type="text"
               name="fullname"
-              placeholder="Full Name"
+              placeholder="Full 
+               Name"
               onChange={handleChange}
               required
-              className="px-4 py-3 text-lg"
             />
+
             <Input
               type="email"
-              placeholder="Email"
               name="email"
+              placeholder="Email"
               onChange={handleChange}
               required
-              className="px-4 py-3 text-lg"
             />
             <Input
               type="password"
@@ -101,7 +102,6 @@ const SignupModal = ({ isOpen, onClose, openLogin }) => {
               placeholder="Password"
               onChange={handleChange}
               required
-              className="px-4 py-3 text-lg"
             />
             <Input
               type="password"
@@ -109,14 +109,12 @@ const SignupModal = ({ isOpen, onClose, openLogin }) => {
               placeholder="Repeat Password"
               onChange={handleChange}
               required
-              className="px-4 py-3 text-lg"
             />
 
             <Button
               type="submit"
               className="w-full bg-black text-white dark:bg-white dark:text-black transition hover:opacity-80 flex justify-center items-center h-12 text-lg"
               disabled={loading}
-              onClick={handleSignup}
             >
               {loading ? (
                 <Loader2 className="animate-spin w-6 h-6" />
@@ -132,8 +130,8 @@ const SignupModal = ({ isOpen, onClose, openLogin }) => {
             <button
               className="underline font-medium text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition"
               onClick={() => {
-                onClose(); // Close signup modal
-                openLogin(); // Open login modal
+                onClose();
+                openLogin();
               }}
             >
               Log in

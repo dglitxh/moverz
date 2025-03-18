@@ -1,5 +1,6 @@
 import { auth } from "@/lib/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { NextResponse } from "next/server";
 
 export async function POST(req, res) {
   let err;
