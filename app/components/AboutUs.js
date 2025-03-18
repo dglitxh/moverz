@@ -71,16 +71,7 @@ const AboutUs = () => {
             partner in every transition.
           </p>
 
-          {/* Signature Image */}
-          <div className="mt-6">
-            <Image 
-              src="/signature.png" 
-              alt="Signature" 
-              width={150} 
-              height={50} 
-              className="opacity-80"
-            />
-          </div>
+         
         </motion.div>
       </div>
     </section>
