@@ -1,7 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Dialog, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X, Loader2 } from "lucide-react";
@@ -42,8 +47,8 @@ const LoginModal = ({ isOpen, onClose, openSignup }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <div 
-        className="fixed inset-0 bg-black/50 dark:bg-white/10 backdrop-blur-md flex items-center justify-center z-50 px-4 sm:px-0" 
+      <div
+        className="fixed inset-0 bg-black/50 dark:bg-white/10 backdrop-blur-md flex items-center justify-center z-50 px-4 sm:px-0"
         onClick={onClose}
       >
         <motion.div
@@ -56,8 +61,8 @@ const LoginModal = ({ isOpen, onClose, openSignup }) => {
         >
           {/* Close Button */}
           <DialogClose asChild>
-            <button 
-              onClick={onClose} 
+            <button
+              onClick={onClose}
               className="absolute top-3 right-3 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition p-2"
             >
               <X className="w-6 h-6" />
@@ -73,23 +78,39 @@ const LoginModal = ({ isOpen, onClose, openSignup }) => {
 
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-4 mt-4">
-            <Input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-            <Input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-            
-            <Button 
-              type="submit" 
-              className="w-full bg-black text-white dark:bg-white dark:text-black transition hover:opacity-80 flex justify-center items-center h-12 text-lg" 
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={handleChange}
+              required
+            />
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+
+            <Button
+              type="submit"
+              className="w-full bg-black text-white dark:bg-white dark:text-black transition hover:opacity-80 flex justify-center items-center h-12 text-lg"
               disabled={loading}
             >
-              {loading ? <Loader2 className="animate-spin w-6 h-6" /> : "Log In"}
+              {loading ? (
+                <Loader2 className="animate-spin w-6 h-6" />
+              ) : (
+                "Log In"
+              )}
             </Button>
           </form>
 
           {/* Don't have an account? Sign Up */}
           <p className="text-sm text-center mt-4 text-gray-600 dark:text-gray-400">
             Don't have an account?{" "}
-            <button 
-              className="underline font-medium text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition" 
+            <button
+              className="underline font-medium text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition"
               onClick={() => {
                 onClose();
                 openSignup();

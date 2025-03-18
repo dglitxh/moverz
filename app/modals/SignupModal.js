@@ -81,18 +81,46 @@ const SignupModal = ({ isOpen, onClose, openLogin }) => {
           {/* Form */}
           <form onSubmit={handleSignup} className="space-y-4 mt-4">
             <Input
-             type="text"
+              type="text"
               name="fullname"
-               placeholder="Full 
-               Name" onChange={handleChange} required
-                />
-                
-            <Input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-            <Input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-            <Input type="password" name="password2" placeholder="Repeat Password" onChange={handleChange} required />
+              placeholder="Full 
+               Name"
+              onChange={handleChange}
+              required
+            />
 
-            <Button type="submit" className="w-full bg-black text-white dark:bg-white dark:text-black transition hover:opacity-80 flex justify-center items-center h-12 text-lg" disabled={loading}>
-              {loading ? <Loader2 className="animate-spin w-6 h-6" /> : "Sign Up"}
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={handleChange}
+              required
+            />
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+            <Input
+              type="password"
+              name="password2"
+              placeholder="Repeat Password"
+              onChange={handleChange}
+              required
+            />
+
+            <Button
+              type="submit"
+              className="w-full bg-black text-white dark:bg-white dark:text-black transition hover:opacity-80 flex justify-center items-center h-12 text-lg"
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader2 className="animate-spin w-6 h-6" />
+              ) : (
+                "Sign Up"
+              )}
             </Button>
           </form>
 
