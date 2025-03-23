@@ -1,92 +1,76 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Clock, DollarSign, ThumbsUp, Truck } from "lucide-react";
-import Image from "next/image";
+import { ShieldCheck, Clock, DollarSign, ThumbsUp } from "lucide-react";
 
 const standoutFeatures = [
   {
     id: 1,
-    title: "Safety & Reliability First",
-    description: "We handle your belongings with care, ensuring they arrive safely.",
+    title: "Safe & Secure Moving",
+    description: "Your belongings are handled with care and professionalism.",
     icon: ShieldCheck,
-    image: "/safety.jpg",
   },
   {
     id: 2,
     title: "Always On Time",
-    description: "We value your time and guarantee punctual pick-ups and deliveries.",
+    description: "Punctual pick-ups and deliveries—your schedule matters.",
     icon: Clock,
-    image: "/on-time.jpg",
   },
   {
     id: 3,
-    title: "No Hidden Costs",
-    description: "Transparent pricing with no surprise fees. What you see is what you pay.",
+    title: "Transparent Pricing",
+    description: "No hidden fees—just honest, upfront pricing.",
     icon: DollarSign,
-    image: "/pricing.jpg",
   },
   {
     id: 4,
     title: "Customer Satisfaction",
-    description: "Thousands of happy customers trust us for their moving needs.",
+    description: "Trusted by thousands for a smooth moving experience.",
     icon: ThumbsUp,
-    image: "/customers.jpg",
-  },
-  {
-    id: 5,
-    title: "Modern Moving Equipment",
-    description: "We use the latest tools and trucks to make your move seamless.",
-    icon: Truck,
-    image: "/equipment.jpg",
   },
 ];
 
 const StandOut = () => {
   return (
-    <section className="container-lg bg-background py-16">
-      <div className="container mx-auto px-6">
-        {/* Section Intro - Center Aligned */}
+    <section className="bg-white py-20">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center md:items-start">
+
+        {/* Left Side - Title & Description */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-2xl mx-auto text-center mb-10"
+          className="md:w-1/2 mb-10 md:mb-0"
         >
-          <h2 className="text-lg font-semibold text-primary uppercase tracking-wide">What Makes Us Stand Out?</h2>
-          <h3 className="text-muted-foreground mt-4">Moving Made Easier for You</h3>
-          <p className="text-muted-foreground mt-4">
-            Moving can be stressful, but we make it <strong>effortless, efficient, and affordable.</strong>  
-            Here's why people trust us:
+          <p className="text-sm text-red-600 font-semibold">/ Why Choose Us?</p>
+          <h2 className="text-5xl font-bold text-gray-900 mt-2">
+            Moving Made Easy & Stress-Free
+          </h2>
+          <p className="text-muted-foreground mt-4 leading-relaxed">
+            From packing to delivery, our expert movers ensure a smooth and hassle-free experience, so you can focus on your new journey.
           </p>
+          <div className="mt-6">
+            <a href="/contact" className="text-red-600 font-semibold hover:underline">Call Now →</a>
+            <a href="/estimate" className="ml-6 text-red-600 font-semibold hover:underline">Get a Free Estimate →</a>
+          </div>
         </motion.div>
 
-        {/* Features Grid with Images */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Right Side - Features Grid */}
+        <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {standoutFeatures.map((feature, index) => (
             <motion.div
               key={feature.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="relative bg-card rounded-lg shadow-md overflow-hidden"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex items-start space-x-4 border-t pt-4"
             >
-              {/* Image */}
-              <Image
-                src={feature.image}
-                alt={feature.title}
-                width={500}
-                height={300}
-                className="w-full h-48 object-cover"
-              />
-
-              {/* Content */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
-                <div className="flex items-center space-x-3">
-                  <feature.icon className="w-8 h-8 text-white" />
-                  <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
-                </div>
-                <p className="text-sm text-gray-300 mt-1">{feature.description}</p>
+              <div className="p-3 bg-yellow-500 rounded-full">
+                <feature.icon className="w-6 h-6 text-gray-900" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
+                <p className="text-gray-600 text-sm">{feature.description}</p>
               </div>
             </motion.div>
           ))}

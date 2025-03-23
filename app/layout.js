@@ -26,7 +26,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
+        <div className="container-sm mx-auto px-6">
         {children}
+        </div>
         <Footer />
         <Toaster position="top-right" richColors />
       </body>
